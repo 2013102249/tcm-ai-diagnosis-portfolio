@@ -1,0 +1,68 @@
+{
+  "evaluatedAt": "2026-11-19T05:28:12.732Z",
+  "engine": "Demo 内置规则引擎（复刻 app.js 评分逻辑，非真实临床模型）",
+  "dataset": {
+    "size": 60,
+    "source": "仿真构造",
+    "dims": {
+      "正常": 40,
+      "边界": 10,
+      "混淆": 10
+    }
+  },
+  "top1": {
+    "overall": 95,
+    "正常": 100,
+    "边界": 100,
+    "混淆": 70
+  },
+  "top3": {
+    "overall": 98,
+    "正常": 100,
+    "边界": 100,
+    "混淆": 90
+  },
+  "contraindication": {
+    "posCases": 14,
+    "recallHit": 12,
+    "recallRate": 86,
+    "negCases": 7,
+    "falsePositive": 0,
+    "falsePositiveRate": 0
+  },
+  "latencyMsRuleEngine": 0.015,
+  "misCases": [
+    {
+      "tag": "近似证型-3",
+      "dim": "混淆",
+      "gold": "肝胃不和证",
+      "top1": "心肾不交证",
+      "symptoms": [
+        "胃脘胀痛",
+        "失眠",
+        "腰膝酸软"
+      ]
+    },
+    {
+      "tag": "近似证型-6",
+      "dim": "混淆",
+      "gold": "心肾不交证",
+      "top1": "肝阳上亢证",
+      "symptoms": [
+        "失眠",
+        "头晕",
+        "急躁易怒"
+      ]
+    },
+    {
+      "tag": "近似证型-8",
+      "dim": "混淆",
+      "gold": "气血两虚证",
+      "top1": "肝郁脾虚证",
+      "symptoms": [
+        "神疲乏力",
+        "胸胁胀痛"
+      ]
+    }
+  ]
+}

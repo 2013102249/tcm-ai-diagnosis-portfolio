@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云诊中医大脑 · AI 产品经理作品集</title>
+<style>
+  :root{
+    --purple:#7C3AED;--purple-d:#5B21B6;--purple-soft:#EDE4FF;
+    --blue:#2563EB;--blue-d:#1D4ED8;--blue-soft:#E0EBFF;
+    --teal:#0D9488;--teal-soft:#CCFBF1;
+    --amber:#D97706;--amber-soft:#FEF3C7;
+    --rose:#E11D48;--rose-soft:#FFE4E6;
+    --green:#059669;--green-soft:#D1FAE5;
+    --gray:#6B7280;--gray-soft:#F3F4F6;
+    --ink:#1F2430;--muted:#667085;--line:#E5E7EB;--bg:#F7F7FB;--card:#FFFFFF;
+    --shadow:0 6px 24px rgba(124,58,237,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+  /* Hero */
+  .hero{background:linear-gradient(135deg,#7C3AED 0%,#5B21B6 45%,#2563EB 100%);color:#fff;padding:46px 0 40px;position:relative;overflow:hidden}
+  .hero:after{content:"";position:absolute;right:-80px;top:-120px;width:340px;height:340px;border-radius:50%;background:rgba(255,255,255,.08)}
+  .hero .wrap{position:relative;z-index:1}
+  .kicker{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);font-size:12px;font-weight:700;letter-spacing:1px;padding:5px 14px;border-radius:999px;margin-bottom:16px}
+  .hero h1{font-size:32px;line-height:1.25;margin-bottom:10px;letter-spacing:-.5px}
+  .hero h1 span{background:linear-gradient(90deg,#fff,#C4B5FD);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .sub{font-size:16px;opacity:.92;max-width:760px}
+  .hero-meta{font-size:13px;opacity:.8;margin-top:10px}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .legend span{font-size:11px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:4px 10px;border-radius:999px}
+  .demo-cta{display:inline-flex;align-items:center;gap:9px;margin-top:22px;background:#fff;color:var(--purple-d);font-weight:800;font-size:14px;padding:11px 20px;border-radius:11px;box-shadow:0 8px 24px rgba(0,0,0,.18);transition:.18s}
+  .demo-cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.24)}
+  .demo-cta .ico{width:26px;height:26px;border-radius:7px;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .demo-cta small{display:block;font-size:11px;font-weight:600;opacity:.7}
+
+  /* Nav */
+  nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  nav .wrap::-webkit-scrollbar{display:none}
+  nav a{white-space:nowrap;font-size:13px;font-weight:600;color:var(--muted);padding:13px 14px;border-bottom:2px solid transparent}
+  nav a:hover{color:var(--purple);border-bottom-color:var(--purple)}
+  nav a.demo-link{color:var(--purple)}
+
+  section{padding:38px 0 6px;scroll-margin-top:56px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .sec-no{width:34px;height:34px;flex:0 0 34px;border-radius:10px;background:var(--purple-soft);color:var(--purple);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+  .sec-head h2{font-size:21px;letter-spacing:-.3px}
+  .sec-head .en{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:1px;text-transform:uppercase}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:20px 22px;margin-bottom:14px}
+  .h3{font-size:15px;font-weight:800;color:var(--purple-d);margin:16px 0 10px;display:flex;align-items:center;gap:8px}
+  .h3:first-child{margin-top:0}
+  .h3:before{content:"";width:4px;height:15px;border-radius:2px;background:var(--purple)}
+  .p{font-size:14px;color:#374151;margin-bottom:8px;word-break:break-word}
+  .p:last-child{margin-bottom:0}
+
+  .ev{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:5px;vertical-align:middle;margin:0 1px}
+  .ev-real{background:var(--green-soft);color:#047857}.ev-sim{background:var(--blue-soft);color:var(--blue-d)}
+  .ev-est{background:var(--amber-soft);color:#B45309}.ev-hyp{background:var(--gray-soft);color:#4B5563}
+
+  .tbl-wrap{overflow-x:auto;margin:6px 0 4px;border:1px solid var(--line);border-radius:10px}
+  table{border-collapse:collapse;width:100%;font-size:13px;min-width:520px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--purple-soft);color:var(--purple-d);font-weight:700;white-space:nowrap}
+  tr:last-child td{border-bottom:0} tr:nth-child(even) td{background:#FBFAFE}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:6px 0}
+  .mini{border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:13px 14px;background:#fff}
+  .mini.purple{border-left-color:var(--purple)}.mini.teal{border-left-color:var(--teal)}.mini.amber{border-left-color:var(--amber)}.mini.rose{border-left-color:var(--rose)}
+  .mini .tag{display:inline-block;font-size:10px;font-weight:700;color:var(--muted);background:var(--gray-soft);padding:2px 7px;border-radius:5px;margin-bottom:6px}
+  .mini .t{font-weight:800;font-size:14px;margin-bottom:4px}.mini .b{font-size:12.5px;color:#4B5563}
+
+  .kv{display:grid;grid-template-columns:130px 1fr;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .kv .k,.kv .v{padding:9px 12px;font-size:13px;border-bottom:1px solid var(--line)}
+  .kv .k{background:#FAFAFC;font-weight:700;color:var(--muted)}.kv .v{color:#374151}
+  .kv .k:last-of-type,.kv .v:last-of-type{border-bottom:0}
+
+  .callout{border-radius:10px;padding:12px 14px;font-size:13px;margin:6px 0;border-left:4px solid var(--blue);background:var(--blue-soft);color:var(--blue-d)}
+  .callout.warn{border-left-color:var(--amber);background:var(--amber-soft);color:#92400E}
+
+  .score-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:8px 0}
+  .score{border:1px solid var(--line);border-radius:11px;padding:12px 14px;background:#fff}
+  .score .q{font-size:12px;color:var(--muted);font-weight:700}
+  .score .v{font-size:24px;font-weight:800;color:var(--purple);margin:2px 0}
+  .score .v small{font-size:12px;color:var(--muted);font-weight:600}
+  .score .g{font-size:11.5px;color:#4B5563}
+
+  details{border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:#fff}
+  details summary{cursor:pointer;padding:11px 14px;font-weight:700;font-size:14px;color:var(--ink);list-style:none;display:flex;align-items:center;gap:9px}
+  details summary::-webkit-details-marker{display:none}
+  details summary:before{content:"+";color:var(--purple);font-weight:800;font-size:17px;width:16px}
+  details[open] summary:before{content:"−"}
+  details .dbody{padding:0 14px 14px 39px}
+
+  .map{font-size:13px}
+  .map .m-legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .map .m-legend span{font-size:11px;color:#374151;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 10px;display:inline-flex;align-items:center;gap:6px}
+  .map .m-legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .map .m-panel{background:#FAFAFC;border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px}
+  .map .m-title{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:12px;letter-spacing:.3px}
+  .map .m-flow{display:flex;align-items:stretch;overflow-x:auto}
+  .map .m-zone{flex:1;min-width:130px;display:flex;flex-direction:column}
+  .map .m-zh{color:#fff;text-align:center;font-size:12.5px;font-weight:700;padding:8px 4px;border-radius:8px 8px 0 0}
+  .map .m-zb{background:#fff;border:1px solid var(--line);border-top:0;border-radius:0 0 8px 8px;padding:10px 8px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .map .m-node{background:#fff;border:1px solid var(--line);border-left-width:4px;border-radius:7px;padding:8px 9px;font-size:12px;white-space:pre-line}
+  .map .m-chip{display:inline-block;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;margin-bottom:4px}
+  .map .m-arrow{flex:0 0 22px;display:flex;align-items:center;justify-content:center}
+  .map .m-arrow:before{content:"";width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:9px solid #9CA3AF}
+  .map .zp{background:var(--purple)}.map .np{border-left-color:var(--purple)}.map .cp{background:var(--purple-soft);color:var(--purple)}
+  .map .zb{background:var(--blue)}.map .nb{border-left-color:var(--blue)}.map .cb{background:var(--blue-soft);color:var(--blue)}
+  .map .zt{background:var(--teal)}.map .nt{border-left-color:var(--teal)}.map .ct{background:var(--teal-soft);color:var(--teal)}
+  .map .za{background:var(--amber)}.map .na{border-left-color:var(--amber)}.map .ca{background:var(--amber-soft);color:var(--amber)}
+  .map .zr{background:var(--rose)}
+  .map .m-fb{background:var(--rose-soft);border:1px dashed var(--rose);border-radius:11px;padding:13px}
+  .map .m-fb-t{font-size:12px;font-weight:700;color:var(--rose);margin-bottom:10px}
+  .map .m-fb-flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+  .map .m-fb-node{background:#fff;border:1px solid var(--rose);color:#9F1239;border-radius:7px;padding:6px 10px;font-size:12px}
+  .map .m-back{margin-top:9px;font-size:11.5px;color:#9F1239;font-weight:700}
+  .map .m-metrics{background:var(--blue-soft);border:1px dashed var(--blue);border-radius:11px;padding:13px}
+  .map .m-grid{display:flex;flex-wrap:wrap;gap:8px}
+  .map .m-item{background:#fff;border:1px solid var(--blue);border-radius:8px;padding:8px 10px;font-size:11.5px;flex:1 1 140px}
+  .map .m-item .m-layer{display:inline-block;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;margin-bottom:4px}
+  .map .le{background:#EDE4FF;color:var(--purple)}.map .lx{background:#CCFBF1;color:var(--teal)}.map .lb{background:#FEF3C7;color:var(--amber)}
+  .map .m-item .m-n{font-weight:700;display:block}.map .m-item .m-p{color:var(--muted)}
+
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:34px 20px 40px}
+  @media(max-width:820px){
+    .hero{padding:36px 0 30px}.hero h1{font-size:24px}
+    section{padding-top:30px}.sec-head h2{font-size:18px}
+    .card{padding:16px}.kv{grid-template-columns:100px 1fr}
+    .map .m-flow{flex-direction:column}
+    .map .m-arrow{height:20px;flex:0 0 20px}
+    .map .m-arrow:before{border-left:6px solid transparent;border-right:6px solid transparent;border-top:9px solid #9CA3AF;border-bottom:0}
+    .map .m-zb{flex-direction:row;flex-wrap:wrap}.map .m-node{flex:1 1 130px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">AI 产品经理作品集 · 中医智能化方向</span>
+    <h1>云诊<span>中医大脑</span></h1>
+    <p class="sub">面向基层中医师的 AI 辅助诊疗工作台：把「望闻问切」结构化，3 秒内给出可溯源的辨证推荐，让名老中医的辨证经验在基层被复用。</p>
+    <p class="hero-meta">中科云诊（河南）医疗科技有限公司 · 产品部 ｜ 关联课题：科技部重点研发计划「中医临床智能辅助诊断与决策推荐」（北京科技大学承担）｜ PRD V1.0</p>
+    <div class="legend">
+      <span>证据分级</span>
+      <span>[真实] 有数据/日志</span><span>[仿真] 样例集跑分</span>
+      <span>[估算] 行业基准推算</span><span>[假设] 待确认</span>
+    </div>
+    <a class="demo-cta" href="demo/index.html">
+      <span class="ico">▶</span>
+      <span>打开可点击 Demo<small>四诊采集 → AI 辨证 → 方剂推荐 → 病历生成，全流程可交互</small></span>
+    </a>
+  </div>
+</header>
+
+<nav><div class="wrap" id="nav"></div></nav>
+
+<main class="wrap">
+  <section id="s1"><div class="sec-head"><div class="sec-no">1</div><div><h2>项目概览</h2><div class="en">Overview &amp; Self-check</div></div></div><div id="b1"></div></section>
+  <section id="s2"><div class="sec-head"><div class="sec-no">2</div><div><h2>作品设计文档</h2><div class="en">Design Doc</div></div></div><div id="b2"></div></section>
+  <section id="s3"><div class="sec-head"><div class="sec-no">3</div><div><h2>可审阅 PRD</h2><div class="en">PRD</div></div></div><div id="b3"></div></section>
+  <section id="s4"><div class="sec-head"><div class="sec-no">4</div><div><h2>综合方案图</h2><div class="en">Solution Map</div></div></div><div class="card map" id="map"></div></section>
+  <section id="s5"><div class="sec-head"><div class="sec-no">5</div><div><h2>评测方案</h2><div class="en">Evaluation</div></div></div><div id="b5"></div></section>
+</main>
+
+<footer>云诊中医大脑 · AI 产品经理作品集 ｜ 单文件页面，可离线打开 ｜ 所有效果数字均标注来源，Demo 跑分不等于临床结论 ｜ AI 推荐仅供医师参考</footer>
+
+<script>
+const DEMO_URL = "demo/index.html";
+const CONFIG = {
+  kicker: "AI 产品经理作品集 · 中医智能化方向",
+  title: "云诊中医大脑",
+  subtitle: "面向基层中医师的 AI 辅助诊疗工作台：四诊结构化采集 + 可溯源辨证推荐 + 方剂与禁忌校验。",
+  nav: [
+    {id:"s1", label:"项目概览"}, {id:"s2", label:"设计文档"}, {id:"s3", label:"PRD"},
+    {id:"s4", label:"方案图"}, {id:"s5", label:"评测方案"},
+    {id:"demo", label:"▶ 打开 Demo", demo:true}
+  ],
+  b1: [
+    {type:"score", items:[
+      {q:"Q1 问题定义", score:"2/2", gap:"目标用户、三类痛点、三个场景清晰；痛点附可观察现象 [假设，源于 PRD 访谈]"},
+      {q:"Q2 指标体系", score:"2/2", gap:"北极星 WAD + 三层指标齐全，口径明确，含 V1.0 目标值 [假设]"},
+      {q:"Q3 评测方案", score:"2/2", gap:"补齐 60 条 [仿真] 评测集、三档通过线、四类回归；禁忌召回经修复前后对比验证 [仿真]"},
+      {q:"Q4 bad case", score:"2/2", gap:"建立 7 类分级，1 条禁忌漏检 case 完整走通归因→修复→复测→入库闭环 [仿真]"}
+    ]},
+    {type:"callout", tone:"warn", text:"证据诚实声明：本作品集的效果数字来自 Demo 内置规则引擎在自建 [仿真] 样例集上的跑分，不等于真实临床模型效果。PRD 中的主任医师一致率等目标均为 [假设]，尚无真实上线数据。"},
+    {type:"h", text:"现有资产盘点与补全处理"},
+    {type:"table", head:["项","盘点结论（已有/薄弱/缺失/矛盾）","处理方式"], rows:[
+      ["产品定位与用户","已有：定位「医生第二大脑」，6 类角色、3 个场景 [真实，源于 PRD]","保留并压缩为作品集背景"],
+      ["功能需求","已有：6 大模块、P0/P1/P2 分级、验收标准 [真实]","保留，整理为 MVP 边界"],
+      ["指标体系","已有：北极星 WAD、业务/使用/质量/安全指标 [假设，目标值]","补齐口径与数据来源标注"],
+      ["技术选型","薄弱：PRD 描述五层架构，但未论证「为什么是这套 AI 方案」","新增 RAG/工作流选型与否决理由"],
+      ["评测方案","缺失：只有验收指标，无评测集/通过线/回归","新建完整评测方案（板块 5）"],
+      ["bad case 闭环","缺失：PRD 要求禁忌召回 100% 但无失败处理机制","新建分类分级 + 迭代闭环，并用真实缺陷验证"],
+      ["数据矛盾","矛盾：PRD 目标「禁忌漏检率 0」与 Demo 规则库仅 9 条存在张力","如实暴露：首轮跑分召回 86%，补规则后达 100% [仿真]"]
+    ]},
+    {type:"h", text:"补全路线图（按投入产出比排序）"},
+    {type:"p", text:"① 先固化 Q1 问题定义与 Q2 指标口径（成本最低、最常被追问）→ ② 写清 Q4 bad case 闭环（用真实缺陷做证据）→ ③ 最后建 Q3 完整评测方案（评测集 / 三档通过线 / 回归）。所有数字先跑分再落文，禁止先写目标后凑数。"},
+    {type:"callout", text:"Demo 为纯前端可交互原型（localStorage 保存进度），无需后端即可完整体验；配套评测脚本 eval/run-eval.js 可复现本页全部 [仿真] 数字。"}
+  ],
+  b2: [
+    {type:"h", text:"背景与痛点"},
+    {type:"p", text:"【基层中医师】在【门诊高峰期、单诊 3–5 分钟】下要完成【四诊采集→辨证→开方→写病历】；现在的做法是【自由文本病历 + 凭个人经验辨证，再翻方书查剂量】；会出现【同证不同治、同治不同方，且四诊信息无法沉淀为可检索医案】；根因是【四诊缺乏结构化录入手段，辨证依赖不可复制的个人经验，HIS/EMR 以西医流程为主、没有面向辨证论治的决策工具】。[假设，源于 PRD 项目背景与访谈]"},
+    {type:"p", text:"可观察证据：PRD 记载「名老中医资源稀缺、基层辨证水平参差不齐」为三类首要痛点之一；单诊录入时长目标被设为 ≤ 3 分钟、病历 ≤ 5 分钟 [假设，目标值]。归因：痛点指向的是「经验不可复制 + 信息不可结构化」，不是医生能力问题——这是产品可介入的位置。"},
+    {type:"h", text:"目标用户与场景"},
+    {type:"table", head:["角色","类型","经验水平","使用频率","决策权","触发场景"], rows:[
+      ["门诊中医师","主用户","辨证经验 1–20 年不等","每日高频","有采纳/修改/拒绝权","患者进诊室后，调历史医案并录入本次四诊"],
+      ["基层/社区医生","主用户","经验相对不足","每日高频","有最终处方权","遇到拿不准的证型时，获取证型与方药推荐减少误判"],
+      ["住院中医师","次用户","中等","每日中频","有医嘱权","查房时调阅历史医案、开具出院带方"],
+      ["科室主任/医教处","次用户","专家级","周级","审核与教学权","按病种/证型检索名老医案做教学查房"],
+      ["信息科管理员","次用户","IT 背景","月级","系统配置权","对接 HIS/EMR、账号权限、日志审计"]
+    ]},
+    {type:"p", text:"三个高频场景：① 普通门诊复诊（核心）；② 名老中医带教（反向检索教学医案）；③ 基层慢病随访（对比上次证型，提示证型迁移）。三场景共用同一条「四诊→辨证→方药」主路径。[真实，源于 PRD]"},
+    {type:"h", text:"方案与 MVP 边界"},
+    {type:"p", text:"产品形态：Web 医生工作站 + 移动端 H5，支持医院内网私有化与 SaaS 多租户。核心功能（输入→处理→输出）：① 四诊采集（舌象拍照/标签点选→结构化四诊记录）；② AI 辨证（四诊记录→Top3 证型+置信度+依据）；③ 方剂推荐（确认证型→治法/经典方/中成药+剂量）；④ 禁忌校验（处方→十八反/十九畏/妊娠/既往史提醒）；⑤ 病历与医案（本次诊疗→结构化病历+时间轴检索）。"},
+    {type:"p", text:"MVP 不做（V1.0 边界）：不替代医生诊断（定位辅助决策软件 SaMD）；不接 LIS/PACS 检验结果（V1.5）；不做慢病证型迁移预警与联邦学习（V2.0）；不覆盖全部科室——先聚焦内科、妇科、儿科高频病种。边界清晰度是产品成熟度的信号。"},
+    {type:"h", text:"技术选型（RAG / 工作流 / Agent / MCP 四类定位）"},
+    {type:"cards", color:"purple", items:[
+      {tag:"主选型", title:"工作流 + RAG", body:"工作流负责固定主路径「四诊→辨证→方药→禁忌→病历」，每步可人工确认、可审计；RAG 负责从中医知识库（术语/方剂/中药/证型）检索可溯源依据。选它的理由：临床流程固定可枚举、强合规、结论必须给出处。否决纯 Agent：路径固定、步骤可预定义，用 Agent 的自主规划是过度设计且不可控。否决纯微调大模型：知识常更新、需给出处，微调无法低成本刷新且会幻觉。能力边界：知识库覆盖不足的冷门科室推荐会失准，此时降级为纯人工录入并将 case 回流。"},
+      {tag:"辅助", title:"多模态（舌象识别）", body:"舌象照片→舌质/舌苔/舌形建议值，医生一键确认或修改。理由：望诊是四诊核心且拍照最易结构化。否决「舌象自动定证」：单模态证据不足，故只作建议值、保留医生确认权。边界：光照/角度差时识别置信度低，需人工复核。"},
+      {tag:"集成", title:"MCP / HL7-FHIR 网关", body:"对接 HIS/EMR/LIS 用标准适配器（HL7 v2.x / FHIR R4）与统一身份认证。理由：医疗系统异构、需标准化工具协议。否决「逐院硬编码对接」：集成周期不可控。边界：厂商接口开放程度不一，按标准网关 + 定制报价处理。"}
+    ]},
+    {type:"h", text:"指标体系（效果 / 体验 / 业务，与板块 5 一一对应）"},
+    {type:"table", head:["指标","层","定义","口径（分子/分母/范围）","目标值","采集方式","坏例判定"], rows:[
+      ["辨证 Top1 一致率","效果","Top1 证型与主任医师结论一致比例","分子=Top1 命中；分母=有效辨证请求；范围=评测集","≥70% [假设]","仿真跑分 / 专家标注","Top1 与专家结论不同证型"],
+      ["辨证 Top3 一致率","效果","Top3 含主任医师结论的比例","分子=Top3 命中；分母=有效辨证请求","≥88% [假设]","仿真跑分","专家结论不在前三"],
+      ["禁忌规则召回率","效果","应拦截禁忌组合被正确拦截比例","分子=命中禁忌数；分母=禁忌样例总数","100% [假设]","规则测试集","任一禁忌组合漏检（P0）"],
+      ["辨证响应时延 P95","体验","从提交四诊到返回 Top3 的 P95 耗时","统计=全量请求的 95 分位","≤3 秒 [假设]","日志埋点","P95 > 3 秒"],
+      ["单诊录入时长","体验","进入采集到完成四诊的中位时长","统计=有效诊次中位数","≤3 分钟 [假设]","日志埋点","中位 > 5 分钟"],
+      ["AI 推荐采纳率","业务","医生未修改直接采纳推荐的比例","分子=直接采纳次数；分母=辨证总次数","≥50% [假设]","埋点+用户行为","采纳率 < 50% 触发归因"],
+      ["周活跃医生人均医案数 WAD","业务","北极星：周活医生人均结构化医案数","分子=结构化医案数；分母=周活医生数","≥25 例/周 [假设]","运营看板","低于目标进入归因"]
+    ]},
+    {type:"h", text:"价值与边界"},
+    {type:"kv", items:[
+      {k:"增量价值", v:"旧方案下基层医生需凭经验辨证并手翻方书，四诊不可沉淀；本方案给出 Top3 可溯源推荐 + 禁忌强提醒，目标把单诊录入压到 ≤3 分钟、采纳率 ≥50% [假设，待真实上线验证]。"},
+      {k:"适用边界", v:"适合二级以上中医院、社区中心的门诊/随访高频场景，且先覆盖内科/妇科/儿科常见证型；不适合冷门科室、复杂合并症、需独立下诊断的场景。"},
+      {k:"风险与责任", v:"AI 结论统一标注「仅供医师参考，最终诊断由执业医师作出」；禁忌漏检为零容忍（P0）；患者敏感字段加密存储、日志脱敏；按 SaMD 路径规划注册，V1.0 不替代医师诊断。"}
+    ]}
+  ],
+  b3: [
+    {type:"p", text:"在已有 PRD（10 章、含 12 张表）基础上补齐 AI 产品特有章节。五类内容（产品逻辑 / 核心流程 / AI 组件 / 人工确认 / 异常兜底）均在正文落位，并与板块 4「综合方案图」图文一致。"},
+    {type:"details", title:"0. 产品逻辑与范围（原 PRD 保留）", open:true, blocks:[
+      {type:"p", text:"定位「AI 辅助诊疗工作台 / 医生第二大脑」：医生完成四诊录入后，系统实时给出证型、方剂与配伍禁忌建议，并将全过程结构化沉淀为医案数据。输入=四诊信息，输出=辨证+方药+病历；不做独立诊断。[真实，源于 PRD 1.3]"},
+      {type:"p", text:"范围：四诊采集、AI 辨证、处方推荐、医案库、知识库、HIS/EMR 集成、运营后台七大模块；优先级 P0 六项 V1.0 交付。[真实]"}
+    ]},
+    {type:"details", title:"1. 模型选型与理由", blocks:[
+      {type:"p", text:"主选「工作流 + RAG」：辨证主路径固定（四诊→Top3→确认→方药→禁忌→病历）用工作流编排，保证可确认、可审计；中医知识库用 RAG 提供可溯源依据（方剂出处如《伤寒论》《和剂局方》、性味归经、禁忌）。舌象用多模态小模型只出建议值。"},
+      {type:"p", text:"否决方案：① 纯 Agent 自主规划——流程固定可枚举，不可控且成本高；② 纯大模型微调——知识常更新、需给出处，微调刷新成本高压不住幻觉；③ 纯规则专家系统——覆盖度有限、冷门证型盲区（本 Demo 规则引擎正暴露此问题，见板块 5 bad case）。[假设，待真实数据后调整]"},
+      {type:"p", text:"[假设] 拿到真实数据后：以主任医师标注医案为金标评估是否需要专用辨证模型；若 RAG 检索命中率不足再考虑领域微调。"}
+    ]},
+    {type:"details", title:"2. Prompt / 知识库策略", blocks:[
+      {type:"p", text:"Prompt 结构：角色=中医辨证助手；约束=仅依据四诊与知识库证据、不给独立诊断、低置信度须提示存疑；输出=证型+置信度+命中依据+阴性症状的结构化 JSON；few-shot=高频证型样例；防注入=医生输入只作症状证据，不执行指令。"},
+      {type:"p", text:"知识库：中药（性味归经/功效/剂量/禁忌）、经典方剂（组成/主治/方解/出处）、证型库、术语标准对照、十八反十九畏规则表。更新机制：专家委员会审核入库，版本可追溯；责任人=临床顾问 + 产品。密钥用占位符，不写具体凭证。"}
+    ]},
+    {type:"details", title:"3. 评测指标与失败兜底", blocks:[
+      {type:"p", text:"效果指标：Top1/Top3 一致率、禁忌召回率；体验指标：辨证 P95、录入时长（与板块 2、5 一致）。bad case 分类：事实错误 / 幻觉 / 漏召 / 误召 / 格式违规 / 延迟超时 / 安全越界。"},
+      {type:"p", text:"兜底策略：低置信度→提示「辨证存疑」并追加鉴别问题；AI 超时/异常→自动降级为纯人工录入模式，不阻塞门诊；知识库未命中→标「暂无依据」而非编造；禁忌命中→红色强提醒且必须填写理由才能继续。"}
+    ]},
+    {type:"details", title:"4. 人工确认节点", blocks:[
+      {type:"p", text:"三个强制人工节点：① 证型确认——医生采纳/修改/拒绝，行为回流模型；② 方剂与剂量确认——超药典剂量弹警示；③ 禁忌强提醒——命中十八反/十九畏/妊娠/既往史冲突时必须填写理由方可继续。复核人=执业医师，拥有最终决策权；超时=降级人工模式；不通过=回流样本库并在知识库标记。"}
+    ]},
+    {type:"details", title:"5. 成本与延迟", blocks:[
+      {type:"p", text:"延迟：辨证 P95 ≤3 秒、舌象识别 P95 ≤2 秒 [假设，PRD 目标]；规则引擎纯计算单次约 0.015ms [仿真，Node 环境实测，不代表线上 AI]。成本权衡：舌象识别用轻量多模态模型、辨证检索用 embed+小模型、仅复杂证型调用大模型；知识库与规则高频结果做缓存。成本区间 [估算]：待按真实调用量核算。"}
+    ]},
+    {type:"details", title:"6. 数据飞轮", blocks:[
+      {type:"p", text:"闭环：医生的采纳/修改/拒绝 → 结构化留痕 → 每周 bad case 回标会（联合北科大）→ 入评测集 → 迭代 Prompt/知识库 → 回归通过再上线 → 新版本产生新数据。冷启动：先用 PRD 示范医院医案 + 专家标注构造首版评测集（本作品集用 60 条 [仿真] 集演示该机制）。"}
+    ]},
+    {type:"details", title:"7. 边界与责任", blocks:[
+      {type:"p", text:"AI 不做独立诊断、不替代执业医师；高风险（禁忌、妊娠、儿童、大剂量）强制人工复核；隐私：敏感字段加密、日志脱敏；合规：网安法/数安法/个保法、等保三级、SaMD 注册路径。与板块 2「价值与边界」一致。"}
+    ]}
+  ],
+  b5: [
+    {type:"h", text:"1. 评测集设计"},
+    {type:"table", head:["项","内容"], rows:[
+      ["样例来源","仿真构造：按 Demo 证型库的特征权重与舌脉组合生成，gold 标签由构造规则确定 [仿真]"],
+      ["规模与构成","60 条 [仿真]：正常 40 / 边界 10 / 混淆对抗 10；另禁忌测试 14 正例 + 7 反例 [仿真]"],
+      ["标注方式","构造即标注（规则生成 gold）；专家标注口径作为真实上线后的目标 [假设]"],
+      ["一致性校验","真实上线后按 10–20% 抽样人工复核、分歧仲裁；本仿真集由确定性脚本生成，可复现 [仿真]"]
+    ]},
+    {type:"table", head:["维度","条数","样例说明"], rows:[
+      ["正常","40","每证型 5 条变体：取高权重症状 + 对应舌象/脉象，典型高频表现 [仿真]"],
+      ["边界","10","仅 2 个症状、无舌脉，模拟信息不足场景 [仿真]"],
+      ["混淆对抗","10","近似证型（如肝胃不和 vs 心肾不交共用失眠/腰膝酸软），考验区分度 [仿真]"],
+      ["禁忌正例","14","含十八反/十九畏/妊娠禁忌/既往史冲突，测召回 [仿真]"],
+      ["禁忌反例","7","安全组合与低剂量甘草，测误报 [仿真]"]
+    ]},
+    {type:"h", text:"2. 指标定义表（与板块 2、3 一一对应）"},
+    {type:"table", head:["指标","层","口径（分子/分母/范围）","采集方式","坏例判定","目标值","实测值"], rows:[
+      ["辨证 Top1 一致率","效果","Top1 命中 / 有效辨证请求","仿真跑分","Top1 非 gold 证型","≥70% [假设]","95% [仿真, n=60]"],
+      ["辨证 Top3 一致率","效果","Top3 含 gold / 有效请求","仿真跑分","gold 不在前三","≥88% [假设]","98% [仿真, n=60]"],
+      ["禁忌召回率","效果","命中禁忌 / 禁忌正例","规则测试","任一禁忌漏检（P0）","100% [假设]","100% [仿真, 修复后 14/14]"],
+      ["禁忌误报率","效果","误命中 / 安全反例","规则测试","安全组合被误拦","越低越好 [假设]","0% [仿真, 0/7]"],
+      ["辨证响应时延 P95","体验","全量请求 95 分位","日志埋点","P95 > 3 秒","≤3 秒 [假设]","规则层 0.015ms [仿真]，线上待实测"],
+      ["AI 推荐采纳率","业务","直接采纳 / 辨证总次数","行为埋点","< 50% 触发归因","≥50% [假设]","未上线，无数据"]
+    ]},
+    {type:"callout", tone:"warn", text:"置信度说明：60 条仿真集下，±5% 的差异不具统计显著性；正常/边界维度 100% 是因为样例按规则特征构造，存在「自我验证」偏差，不可解读为临床准确率。真正的区分度看混淆维度（Top1 70%），那才是需要改进的地方。"},
+    {type:"h", text:"3. 通过线（三档 + 置信度 + 合成规则）"},
+    {type:"table", head:["指标","阻断线","达标线","优秀线","实测结论"], rows:[
+      ["Top1 一致率","<60%","≥70%","≥85%","95% [仿真] 达优秀，但混淆维度仅 70% [仿真]，需 specialists 复核"],
+      ["Top3 一致率","<75%","≥88%","≥95%","98% [仿真] 达优秀"],
+      ["禁忌召回率","<100%","=100%","=100% 且误报 0","修复后 100%/误报 0 [仿真] 达标；阻断线曾触发（见 bad case）"],
+      ["辨证 P95"," >5秒","≤3秒","≤2秒","规则层达标，线上 AI 待实测"]
+    ]},
+    {type:"kv", items:[
+      {k:"合成规则", v:"一票否决制：禁忌召回率低于 100%（P0 安全）任一指标低于阻断线即整体不过，符合医疗高风险场景。其余指标按「阻断线兜底 + 达标线计数」评估。"},
+      {k:"定线依据", v:"阻断/达标线取自 PRD 验收目标 [假设]；优秀线在达标线上适度提高 [估算]。真实上线后按主任医师标注分布校准。"}
+    ]},
+    {type:"h", text:"4. 回归方案"},
+    {type:"table", head:["变更类型","回归重点","是否触发"], rows:[
+      ["改 Prompt","全量 60 条 + 历史 bad case 集","必触发"],
+      ["换模型","全量 + 时延/成本复测","必触发"],
+      ["更新知识库","知识相关 case + 禁忌规则集","必触发"],
+      ["改工作流","主路径 + 分支条件 + 兜底回路","必触发"]
+    ]},
+    {type:"p", text:"回归集：固定黄金集（各维度代表 case，版本化）+ 随机抽样集（防过拟合）；频率：每次发版前 + 知识库更新后；不通过处理：回滚或修复后重跑，阻塞发版。禁忌规则变更必须全量跑 14 正例 + 7 反例。"},
+    {type:"h", text:"5. bad case 迭代闭环"},
+    {type:"table", head:["类型","表现","常见归因","修复手段","验证方式"], rows:[
+      ["漏召（本例）","禁忌组合未被拦截","规则库覆盖不全","补规则 + 全量回归","禁忌测试集重跑"],
+      ["误召","安全组合被误拦","阈值过低/规则过宽","收紧条件 + 反例集","误报率复测"],
+      ["幻觉","编造方剂出处/剂量","知识库未命中仍生成","加「无依据不答」约束","引用校验"],
+      ["格式违规","非结构化输出难回写 EMR","输出约束弱","结构化输出 + 后校验","格式校验脚本"]
+    ]},
+    {type:"callout", tone:"warn", text:"完整闭环示例（真实缺陷，非编造）：首轮跑分禁忌召回 86%（12/14），漏检「瓜蒌反附子」「白芍反藜芦」两组十八反——根因是 Demo 规则库只收录 9 条配伍，未覆盖十八反歌诀全部组合。修复动作：在 data.js 规则表补充这两条。复测：召回率 100%（14/14）、误报仍 0%。两条已入禁忌回归集，防止再犯。"},
+    {type:"table", head:["#","case 描述","分类","级别","归因（+依据）","修复动作","复测结果","入库回归集"], rows:[
+      ["1","含「瓜蒌+附子」的处方未被禁忌校验拦截 [仿真]","漏召/安全越界","P0","规则库仅收录 9 条，未覆盖「半蒌贝蔹及攻乌」；依据=首轮跑分 12/14","补「瓜蒌反附子」规则","召回 14/14，误报 0 [仿真]","是"],
+      ["2","含「白芍+藜芦」的处方漏检 [仿真]","漏召/安全越界","P0","未覆盖「诸参辛芍叛藜芦」；依据=同一轮跑分漏检","补「白芍反藜芦」规则","召回 14/14 [仿真]","是"],
+      ["3","近似证型「肝胃不和 vs 心肾不交」Top1 判错（混淆维度 70%）[仿真]","误召/边界","P1","共用症状（失眠/腰膝酸软）干扰，主症权重不足","触发存疑提示 + 追加鉴别问题","Top3 覆盖 90% [仿真]，Top1 待专家复核","是"]
+    ]}
+  ],
+  map: {
+    title: "云诊中医大脑 · 综合方案图",
+    subtitle: "四诊结构化 → Top3 辨证 → 人工确认 → 方药禁忌 → 病历回流，异常可降级不阻塞门诊",
+    zones: [
+      {name:"用户侧", color:"purple", nodes:[{label:"患者就诊\n HIS 同步挂号",chip:"入口"},{label:"四诊采集\n舌象/症状/脉象",chip:"输入"}]},
+      {name:"业务流程", color:"blue", nodes:[{label:"结构化四诊\n 记录",chip:"处理"},{label:"病历生成\n 回写 EMR",chip:"输出"}]},
+      {name:"AI 组件", color:"teal", nodes:[{label:"舌象识别\n 多模态建议值",chip:"多模态"},{label:"Top3 辨证\n工作流+RAG",chip:"AI"},{label:"方剂/禁忌\n知识库检索",chip:"RAG"}]},
+      {name:"人工确认", color:"amber", nodes:[{label:"证型确认？\n采纳/修改/拒绝",chip:"判断"},{label:"剂量/禁忌\n复核",chip:"人工"},{label:"结果输出\n处方+病历",chip:"输出"}]}
+    ],
+    fallback: {trigger:"触发：AI 超时 / 低置信度 / 禁忌命中 / 知识库未命中", nodes:["辨证存疑提示+追加问诊","禁忌红色强提醒","降级纯人工录入","无依据标「暂无依据」"], backTo:"结果输出（处方+病历）"},
+    metrics: [
+      {layer:"effect", name:"Top1/Top3 一致率 · 禁忌召回率", point:"埋点：AI 辨证输出 + 禁忌校验"},
+      {layer:"exp", name:"辨证 P95 · 录入时长", point:"埋点：四诊提交→Top3 返回"},
+      {layer:"biz", name:"AI 采纳率 · WAD", point:"埋点：证型确认 + 医案入库"}
+    ],
+    mermaid: ["flowchart TD","  A[HIS 同步挂号] --> B[四诊采集]","  B --> C[结构化四诊]","  C --> D[舌象识别建议]","  C --> E[Top3辨证 工作流+RAG]","  E --> F{证型确认?}","  F -->|修改/拒绝| E","  F -->|采纳| G[方剂+禁忌检索]","  G --> H{禁忌命中?}","  H -->|是| I[强提醒+填理由]","  H -->|否| J[结果输出+病历]","  I --> J","  E -.超时.-> K[降级人工录入]","  K --> J"].join("\n")
+  }
+};
+
+/* ===== 渲染逻辑 ===== */
+const evMap = {"[真实]":"ev-real","[仿真]":"ev-sim","[估算]":"ev-est","[假设]":"ev-hyp"};
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+function fmt(text){
+  let s = esc(text);
+  s = s.replace(/\[(真实|仿真|估算|假设)\]/g, m => '<span class="ev '+evMap[m]+'">'+m+'</span>');
+  return s.replace(/\n/g,"<br>");
+}
+function demoLinkHtml(){
+  return '<div class="callout">🎯 想亲手验证？<a href="'+DEMO_URL+'" style="color:var(--purple-d);font-weight:800;text-decoration:underline">点击打开可点击 Demo</a> —— 录入四诊、查看 Top3 辨证、体验禁忌强提醒与病历生成全流程。</div>';
+}
+function renderBlocks(blocks){
+  return blocks.map(b => {
+    switch(b.type){
+      case "h": return '<div class="h3">'+fmt(b.text)+'</div>';
+      case "p": return '<p class="p">'+fmt(b.text)+'</p>';
+      case "table":
+        return '<div class="tbl-wrap"><table><thead><tr>'+b.head.map(h=>'<th>'+fmt(h)+'</th>').join("")+'</tr></thead><tbody>'+b.rows.map(r=>'<tr>'+r.map(c=>'<td>'+fmt(c)+'</td>').join("")+'</tr>').join("")+'</tbody></table></div>';
+      case "cards":
+        return '<div class="cards">'+b.items.map(it=>'<div class="mini '+(b.color||"blue")+'">'+(it.tag?'<span class="tag">'+fmt(it.tag)+'</span>':"")+'<div class="t">'+fmt(it.title)+'</div><div class="b">'+fmt(it.body)+'</div></div>').join("")+'</div>';
+      case "kv":
+        return '<div class="kv">'+b.items.map(it=>'<div class="k">'+fmt(it.k)+'</div><div class="v">'+fmt(it.v)+'</div>').join("")+'</div>';
+      case "callout":
+        return '<div class="callout '+(b.tone==="warn"?"warn":"")+'">'+fmt(b.text)+'</div>';
+      case "score":
+        return '<div class="score-strip">'+b.items.map(it=>'<div class="score"><div class="q">'+fmt(it.q)+'</div><div class="v">'+fmt(it.score)+'</div><div class="g">'+fmt(it.gap)+'</div></div>').join("")+'</div>';
+      case "details":
+        return '<details '+(b.open?"open":"")+'><summary>'+fmt(b.title)+'</summary><div class="dbody">'+renderBlocks(b.blocks||[])+'</div></details>';
+      default: return "";
+    }
+  }).join("");
+}
+document.getElementById("kicker").textContent = CONFIG.kicker;
+document.getElementById("title").textContent = CONFIG.title;
+document.getElementById("subtitle").textContent = CONFIG.subtitle;
+document.getElementById("nav").innerHTML = CONFIG.nav.map(n=> n.demo ? '<a class="demo-link" href="'+DEMO_URL+'">'+esc(n.label)+'</a>' : '<a href="#'+n.id+'">'+esc(n.label)+'</a>').join("");
+document.getElementById("b1").innerHTML = renderBlocks(CONFIG.b1);
+document.getElementById("b2").innerHTML = renderBlocks(CONFIG.b2);
+document.getElementById("b3").innerHTML = renderBlocks(CONFIG.b3);
+document.getElementById("b5").innerHTML = renderBlocks(CONFIG.b5) + demoLinkHtml();
+
+(function(){
+  const m = CONFIG.map;
+  const zoneColor = p => ({purple:"zp",blue:"zb",teal:"zt",amber:"za"}[p]||"zb");
+  const nodeColor = p => ({purple:"np",blue:"nb",teal:"nt",amber:"na"}[p]||"nb");
+  const chipColor = p => ({purple:"cp",blue:"cb",teal:"ct",amber:"ca"}[p]||"cb");
+  const arrow = '<div class="m-arrow"></div>';
+  const el = document.getElementById("map");
+  el.innerHTML =
+    '<div class="m-legend">'+m.zones.map(z=>'<span><i class="'+zoneColor(z.color)+'"></i>'+esc(z.name)+'</span>').join("")+'<span><i class="zr"></i>异常兜底</span><span><i class="zb"></i>指标埋点</span></div>'+
+    '<div class="m-panel"><div class="m-title">主流程（用户侧 → 业务流程 → AI 组件 → 人工确认）</div><div class="m-flow">'+
+      m.zones.map((z,i)=>(i?arrow:"")+'<div class="m-zone"><div class="m-zh '+zoneColor(z.color)+'">'+esc(z.name)+'</div><div class="m-zb">'+z.nodes.map(n=>(n.chip?'<span class="m-chip '+chipColor(z.color)+'">'+esc(n.chip)+'</span><br>':"")+'<div class="m-node '+nodeColor(z.color)+'">'+fmt(n.label)+'</div>').join("")+'</div></div>').join("")+'</div></div>'+
+    '<div class="m-panel"><div class="m-title">异常兜底（最终回到结果输出）</div><div class="m-fb">'+
+      '<div class="m-fb-t">'+fmt(m.fallback.trigger)+'</div><div class="m-fb-flow">'+m.fallback.nodes.map((n,i)=>(i?arrow:"")+'<div class="m-fb-node">'+esc(n)+'</div>').join("")+'</div>'+
+      '<div class="m-back">↩ 兜底后回到：'+esc(m.fallback.backTo)+'</div></div></div>'+
+    '<div class="m-panel"><div class="m-title">指标埋点（效果 / 体验 / 业务，与板块 2、5 一一对应）</div><div class="m-metrics"><div class="m-grid">'+m.metrics.map(x=>{
+      const lc={effect:"le",exp:"lx",biz:"lb"}[x.layer]||"lb";
+      const ll={effect:"效果",exp:"体验",biz:"业务"}[x.layer]||"指标";
+      return '<div class="m-item"><span class="m-layer '+lc+'">'+ll+'</span><span class="m-n">'+esc(x.name)+'</span><span class="m-p">'+esc(x.point)+'</span></div>';
+    }).join("")+'</div></div></div>';
+})();
+</script>
+</body>
+</html>

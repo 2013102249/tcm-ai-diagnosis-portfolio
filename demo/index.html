@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>云诊中医大脑 · 中医智能辅助诊断与决策支持平台</title>
+<meta name="description" content="面向中医临床场景的 AI 辅助诊疗工作台：四诊结构化采集、AI 辨证推荐、方剂推荐与禁忌校验、医案库与知识库。">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%237C3AED'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='serif'>云</text></svg>">
+</head>
+<body>
+
+<!-- ============ 登录 / 产品概览 ============ -->
+<div id="view-login" class="login-page">
+  <div class="login-hero">
+    <div class="login-badge">中科云诊（河南）医疗科技有限公司 · 产品部</div>
+    <h1>云诊<span>中医大脑</span></h1>
+    <p class="login-sub">中医智能辅助诊断与决策支持平台 V1.0</p>
+    <p class="login-vision">云端济世，智领健康 —— 让智慧中医服务全人类</p>
+    <div class="login-features">
+      <div class="feat"><b>四诊结构化</b><span>望闻问切 3 分钟录入</span></div>
+      <div class="feat"><b>AI 辨证</b><span>3 秒返回 Top3 证型</span></div>
+      <div class="feat"><b>方剂推荐</b><span>经典方 + 禁忌校验</span></div>
+      <div class="feat"><b>医案沉淀</b><span>结构化可检索数据资产</span></div>
+    </div>
+    <div class="login-actions">
+      <button class="btn btn-primary btn-lg" onclick="enterWorkstation()">进入医生工作站</button>
+      <button class="btn btn-ghost btn-lg" onclick="showPage('ops')">运营后台入口</button>
+    </div>
+    <p class="login-note">AI 推荐，仅供医师参考，最终诊断由执业医师作出</p>
+  </div>
+</div>
+
+<!-- ============ 应用主体 ============ -->
+<div id="app" class="app hidden">
+  <aside class="sidebar">
+    <div class="logo"><div class="logo-mark">云</div><div class="logo-text">云诊中医大脑<small>V1.0 · 医生工作站</small></div></div>
+    <nav class="nav">
+      <a class="nav-item active" data-page="dash" onclick="showPage('dash')"><span class="ni-ico">◫</span>工作台</a>
+      <a class="nav-item" data-page="diagnose" onclick="showPage('diagnose')"><span class="ni-ico">✚</span>四诊采集</a>
+      <a class="nav-item" data-page="syndrome" onclick="showPage('syndrome')"><span class="ni-ico">◎</span>AI 辨证</a>
+      <a class="nav-item" data-page="cases" onclick="showPage('cases')"><span class="ni-ico">☰</span>医案库</a>
+      <a class="nav-item" data-page="knowledge" onclick="showPage('knowledge')"><span class="ni-ico">品</span>知识库</a>
+      <a class="nav-item" data-page="ops" onclick="showPage('ops')"><span class="ni-ico">▤</span>运营看板</a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="doc-user"><div class="avatar">张</div><div><b>张医师</b><small>中医内科 · 主任医师</small></div></div>
+      <a onclick="logout()" class="logout-link">退出</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- 工作台 -->
+    <section id="page-dash" class="page active">
+      <header class="page-head"><h2>工作台</h2><p>今日挂号患者已从 HIS 同步 · 更新于 09:40</p></header>
+      <div class="stat-grid">
+        <div class="stat-card"><small>今日诊次</small><b id="stat-visits">12</b><span class="up">▲ 较昨日 +3</span></div>
+        <div class="stat-card"><small>AI 推荐采纳率</small><b>58%</b><span class="up">▲ 高于目标 50%</span></div>
+        <div class="stat-card"><small>平均录入时长</small><b>4'12"</b><span class="up">▲ 达标 ≤5 分钟</span></div>
+        <div class="stat-card"><small>本周 WAD</small><b>26.4</b><span class="up">▲ 目标 ≥25 例/周</span></div>
+      </div>
+      <div class="dash-cols">
+        <div class="card">
+          <h3>今日患者 <span class="tag">HIS 已同步</span></h3>
+          <div id="today-patients" class="patient-list"></div>
+        </div>
+        <div class="card">
+          <h3>快捷入口</h3>
+          <div class="quick-grid">
+            <a class="quick" onclick="startDiagnose(0)"><b>新诊</b><span>四诊采集</span></a>
+            <a class="quick" onclick="showPage('cases')"><b>医案</b><span>检索调阅</span></a>
+            <a class="quick" onclick="showPage('knowledge')"><b>知识库</b><span>药方查询</span></a>
+            <a class="quick" onclick="showPage('ops')"><b>看板</b><span>质量监测</span></a>
+          </div>
+          <h3 style="margin-top:18px">待办提醒</h3>
+          <ul class="todo-list">
+            <li><span class="dot dot-red"></span>昨日 2 份病历禁忌理由待补录</li>
+            <li><span class="dot dot-amber"></span>病案质控：3 份病历四诊摘要缺失</li>
+            <li><span class="dot dot-green"></span>周四名老医案带教讨论 15:00</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 四诊采集 -->
+    <section id="page-diagnose" class="page">
+      <header class="page-head"><h2>四诊结构化采集</h2><p>望 · 闻 · 问 · 切 —— 目标单诊录入 ≤ 3 分钟</p></header>
+      <div class="card patient-bar">
+        <div class="avatar lg">李</div>
+        <div class="pb-info"><b id="dx-patient-name">李桂芳</b><small id="dx-patient-meta">女 · 58 岁 · 高血压病史 8 年 · 妊娠：否</small></div>
+        <select id="dx-patient-select" class="select" onchange="selectDxPatient(this.value)"></select>
+      </div>
+      <div class="dx-tabs" id="dx-tabs">
+        <a class="dx-tab active" data-t="wang" onclick="dxTab('wang')">望诊</a>
+        <a class="dx-tab" data-t="wen" onclick="dxTab('wen')">闻诊</a>
+        <a class="dx-tab" data-t="inquiry" onclick="dxTab('inquiry')">问诊</a>
+        <a class="dx-tab" data-t="pulse" onclick="dxTab('pulse')">切诊</a>
+      </div>
+
+      <div id="dx-wang" class="dx-pane active">
+        <div class="card">
+          <h3>舌象采集 <span class="tag">舌象识别引擎</span></h3>
+          <div class="tongue-box" id="tongue-box">
+            <div class="tongue-visual">👅<span>点击拍摄舌象照片</span></div>
+            <button class="btn btn-primary" onclick="tongueScan()" id="tongue-btn">📷 拍摄 / 上传舌象</button>
+          </div>
+          <div id="tongue-result" class="hidden">
+            <p class="scan-note">舌象识别引擎输出建议值（P95 ≤ 2s），请确认或修改：</p>
+            <div id="tongue-tags" class="tag-groups"></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>面色与神态</h3>
+          <div class="tag-groups" id="face-tags"></div>
+        </div>
+      </div>
+
+      <div id="dx-wen" class="dx-pane">
+        <div class="card"><h3>声音</h3><div class="tag-groups" id="voice-tags"></div></div>
+        <div class="card"><h3>气味</h3><div class="tag-groups" id="smell-tags"></div></div>
+      </div>
+
+      <div id="dx-inquiry" class="dx-pane">
+        <div class="card">
+          <h3>十问歌结构化问诊 <span class="tag">一问寒热二问汗</span></h3>
+          <div id="inquiry-groups"></div>
+        </div>
+      </div>
+
+      <div id="dx-pulse" class="dx-pane">
+        <div class="card">
+          <h3>脉象标签库 <span class="tag">28 脉 · 左右寸关尺</span></h3>
+          <div class="pulse-side"><b>左手</b><div class="tag-groups" id="pulse-left"></div></div>
+          <div class="pulse-side"><b>右手</b><div class="tag-groups" id="pulse-right"></div></div>
+        </div>
+        <div class="card"><h3>腹诊与按诊</h3><div class="tag-groups" id="palpation-tags"></div></div>
+      </div>
+
+      <div class="dx-footer">
+        <div class="dx-progress">已录入 <b id="dx-count">0</b> 项四诊信息</div>
+        <button class="btn btn-primary btn-lg" onclick="runDiagnosis()">⚡ 完成采集，开始 AI 辨证</button>
+      </div>
+    </section>
+
+    <!-- AI 辨证 -->
+    <section id="page-syndrome" class="page">
+      <header class="page-head"><h2>AI 智能辅助辨证</h2><p>响应 P95 ≤ 3s · Top1 一致率目标 ≥ 70% · 仅供医师参考</p></header>
+      <div id="syndrome-empty" class="card empty-state">请先在「四诊采集」完成录入，再进入本页进行辨证。</div>
+      <div id="syndrome-body" class="hidden">
+        <div id="syndrome-cards"></div>
+        <div id="confirm-area" class="card hidden">
+          <h3>治法与方剂推荐 <span class="tag">已确认证型：<span id="confirmed-syndrome">—</span></span></h3>
+          <div id="treatment-area"></div>
+        </div>
+        <div id="prescription-area" class="card hidden">
+          <h3>处方微调与禁忌校验 <span class="tag red">十八反 · 十九畏 · 妊娠禁忌 · 证候禁忌</span></h3>
+          <div id="rx-herbs"></div>
+          <div class="add-herb">
+            <label>加减药材：</label>
+            <div class="tag-groups" id="add-herb-tags"></div>
+          </div>
+          <div id="contraindication-alert" class="contra-alert hidden"></div>
+          <div class="rx-actions">
+            <button class="btn btn-primary" onclick="generateRecord()">生成病历并回写 EMR</button>
+          </div>
+        </div>
+        <div id="record-area" class="card hidden">
+          <h3>中医门诊病历 <span class="tag">符合《中医病历书写基本规范》</span></h3>
+          <pre id="record-preview" class="record-pre"></pre>
+          <div class="rx-actions">
+            <button class="btn btn-ghost" onclick="toast('病历 PDF 已导出（演示）')">导出 PDF</button>
+            <button class="btn btn-ghost" onclick="toast('已回写 EMR，处方流转至药房（演示）')">回写 EMR / 流转药房</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 医案库 -->
+    <section id="page-cases" class="page">
+      <header class="page-head"><h2>中医医案库</h2><p>按患者维度聚合 · 时间轴展示证型演变 · 支持多维检索</p></header>
+      <div class="card case-filter">
+        <input class="input" id="case-kw" placeholder="搜索：病种 / 证型 / 方剂 / 医生…" oninput="renderCases()">
+        <select class="select" id="case-syndrome" onchange="renderCases()"><option value="">全部证型</option></select>
+        <label class="chk"><input type="checkbox" id="case-famous" onchange="renderCases()"> 仅看名老医案</label>
+      </div>
+      <div id="case-list"></div>
+    </section>
+
+    <!-- 知识库 -->
+    <section id="page-knowledge" class="page">
+      <header class="page-head"><h2>中医知识库</h2><p>中药 · 经典方剂 · 证型 —— 内容版本可追溯</p></header>
+      <div class="kb-tabs">
+        <a class="kb-tab active" data-k="herbs" onclick="kbTab('herbs')">中药</a>
+        <a class="kb-tab" data-k="formulas" onclick="kbTab('formulas')">方剂</a>
+        <a class="kb-tab" data-k="syndromes" onclick="kbTab('syndromes')">证型</a>
+      </div>
+      <input class="input kb-search" id="kb-kw" placeholder="搜索…" oninput="renderKb()">
+      <div id="kb-list"></div>
+      <div id="kb-detail" class="kb-detail hidden" onclick="closeKbDetail()"></div>
+    </section>
+
+    <!-- 运营看板 -->
+    <section id="page-ops" class="page">
+      <header class="page-head"><h2>运营后台与数据看板</h2><p>模型监测 · 客户管理 · 日志审计（RBAC 四级角色）</p></header>
+      <div class="stat-grid">
+        <div class="stat-card"><small>签约医院租户</small><b>3 家</b><span class="up">V1.0 目标达成</span></div>
+        <div class="stat-card"><small>付费医生数</small><b>162 人</b><span class="up">▲ 目标 ≥150</span></div>
+        <div class="stat-card"><small>医生周活跃率</small><b>73%</b><span class="up">▲ 目标 ≥70%</span></div>
+        <div class="stat-card"><small>禁忌漏检率</small><b>0</b><span class="up">严重缺陷 0 起</span></div>
+      </div>
+      <div class="chart-grid">
+        <div class="card"><h3>周活跃医生趋势 <span class="tag">近 8 周</span></h3><div id="chart-wau"></div></div>
+        <div class="card"><h3>AI 推荐采纳分布 <span class="tag">模型监测</span></h3><div id="chart-adopt"></div></div>
+      </div>
+      <div class="chart-grid">
+        <div class="card"><h3>Top 证型推荐量 <span class="tag">本月</span></h3><div id="chart-syndrome"></div></div>
+        <div class="card"><h3>辨证置信度分布 <span class="tag">P95 ≤ 3s</span></h3><div id="chart-conf"></div></div>
+      </div>
+      <div class="card">
+        <h3>租户管理</h3>
+        <table class="table">
+          <thead><tr><th>医院租户</th><th>部署形态</th><th>套餐</th><th>状态</th></tr></thead>
+          <tbody>
+            <tr><td>某市中医院（二级甲等）</td><td>私有化 · 等保三级</td><td>旗舰版</td><td><span class="pill green">运行中</span></td></tr>
+            <tr><td>某区中西医结合医院</td><td>私有化 · 混合模式</td><td>标准版</td><td><span class="pill green">运行中</span></td></tr>
+            <tr><td>某社区卫生服务中心</td><td>SaaS 多租户</td><td>基础版</td><td><span class="pill amber">试用期</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>日志审计 <span class="tag">操作留痕 · 患者敏感字段脱敏</span></h3>
+        <table class="table">
+          <thead><tr><th>时间</th><th>操作人</th><th>行为</th><th>对象</th></tr></thead>
+          <tbody>
+            <tr><td>10-12 09:21</td><td>张医师</td><td>AI 辨证采纳</td><td>肝郁脾虚证 · 逍遥散加减</td></tr>
+            <tr><td>10-12 09:05</td><td>李医师</td><td>病历回写 EMR</td><td>患者 王**</td></tr>
+            <tr><td>10-11 16:47</td><td>系统</td><td>禁忌校验命中</td><td>十八反 · 甘草/海藻（已拦截）</td></tr>
+            <tr><td>10-11 15:30</td><td>信息科·陈</td><td>账号权限调整</td><td>新增住院医师账号 ×2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- 移动端底部导航 -->
+  <nav class="tabbar">
+    <a class="tab-item active" data-page="dash" onclick="showPage('dash')"><span>◫</span>工作台</a>
+    <a class="tab-item" data-page="diagnose" onclick="showPage('diagnose')"><span>✚</span>四诊</a>
+    <a class="tab-item" data-page="syndrome" onclick="showPage('syndrome')"><span>◎</span>辨证</a>
+    <a class="tab-item" data-page="cases" onclick="showPage('cases')"><span>☰</span>医案</a>
+    <a class="tab-item" data-page="knowledge" onclick="showPage('knowledge')"><span>品</span>知识</a>
+    <a class="tab-item" data-page="ops" onclick="showPage('ops')"><span>▤</span>运营</a>
+  </nav>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
